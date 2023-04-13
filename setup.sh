@@ -18,7 +18,7 @@ sudo apt-get install -y vim git curl wget zip rar python httpie
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-source ~/.bashrc
+source $HOME/.bashrc
 nvm install --lts
 npm install -g yarn nodemon
 
@@ -45,3 +45,4 @@ source $HOME/.poetry/env
 
 # Cleanup
 sudo apt-get autoremove -y
+exit
