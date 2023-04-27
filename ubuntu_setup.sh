@@ -17,7 +17,7 @@ sudo apt-get update
 sudo apt-get upgrade -y
 
 # Install required packages
-sudo apt-get install -y ca-certificates wget zip rar build-essential unrar unzip gnupg
+sudo apt-get install -y tree ca-certificates wget zip rar build-essential unrar unzip gnupg
 
 # Install pyenv
 curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
