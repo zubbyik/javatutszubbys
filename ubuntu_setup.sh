@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Check if script is run with root privilege
-# if [ "$EUID" -ne 0 ]
-#   then echo "Please run as root"
-#   exit
-# fi
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root"
+  exit
+fi
 
 # Create user
 sudo adduser zubbyik
@@ -22,14 +22,13 @@ sudo apt-get install -y tree ca-certificates wget zip rar build-essential unrar 
 # Install pyenv
 curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
 
-# Add to pyenv environment to bashrc
+# Add pyenv environment to bashrc
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 
 # Install Node.js, NVM, NPM, Yarn, and Nodemon
 # Install NVM and verify installation
-
 export NVM_DIR="$HOME/.nvm"
 
 # Check if nvm is already installed
@@ -47,7 +46,6 @@ fi
 
 # Load nvm
 source "$NVM_DIR/nvm.sh"
-
 
 echo '
 export NVM_DIR="$HOME/.nvm"
@@ -67,7 +65,6 @@ npm install -g yarn
 npm install -g yarn nodemon
 
 # Install Docker and Docker-compose
-
 sudo apt-get remove -y docker docker-engine docker.io containerd runc
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates gnupg lsb-release
@@ -84,10 +81,8 @@ sudo docker run hello-world
 # Create the docker group
 sudo groupadd docker
 
-
-# Add your user to the docker group.
+# Add your user to the docker group
 sudo usermod -aG docker $USER
-
 
 source $HOME/.bashrc
 
@@ -106,7 +101,15 @@ pip3 install poetry
 # Install httpie
 sudo apt-get install -y httpie
 
+# Install Caddy server
+sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update
+sudo apt install caddy
+
 echo "Setup completed successfully!"
 
-#logout from the system
+# Logout from the system
 logout
+
